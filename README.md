@@ -59,9 +59,13 @@ The app uses the **`rentshield`** database with collections such as:
 ## Tech Stack
 
 - **Frontend:** Next.js (App Router) + React
-- **Backend:** Python API routes
+- **Backend:** Python API services (see below)
 - **Database:** MongoDB Atlas (CursorEvent cluster) via official `mongodb` driver
 - **AI:** MiniMax LLM (chatcompletion_v2) + MiniMax TTS (t2a_v2)
+
+### Backend services
+
+- **[property-photo-review-api/](property-photo-review-api/)** — Property photo review and voucher issuance (landlord selects tenant, uploads photos; admin thumbs up/down; tenant gets voucher). Run from that folder; see its README for **how to call the API** (base URL, `X-User-Id` and `X-Role` headers, curl/fetch examples). Other backend services (e.g. user management) live in their own folders.
 
 ---
 

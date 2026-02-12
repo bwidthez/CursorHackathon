@@ -1,21 +1,22 @@
 """Property review API: create, list, get, upload photos, verdict."""
+import secrets
 from datetime import datetime
 from typing import Annotated
 
 from bson import ObjectId
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, Query, status
 
-from backend.config import ALLOWED_IMAGE_EXTENSIONS, DEFAULT_VOUCHER_TYPE, MAX_FILE_SIZE_BYTES
-from backend.db import get_db
-from backend.dependencies import require_admin, require_landlord, require_tenant, require_any_role
-from backend.models import (
+from api.config import ALLOWED_IMAGE_EXTENSIONS, DEFAULT_VOUCHER_TYPE, MAX_FILE_SIZE_BYTES
+from api.db import get_db
+from api.dependencies import require_admin, require_landlord, require_tenant, require_any_role
+from api.models import (
     CreateReviewRequest,
     CreateReviewResponse,
     PhotoEntry,
     PropertyReviewResponse,
     VerdictRequest,
 )
-from backend.storage import allowed_file, save_upload
+from api.storage import allowed_file, save_upload
 
 router = APIRouter(prefix="/api/property-reviews", tags=["property-reviews"])
 
@@ -59,7 +60,6 @@ def create_review(
     """Create a review for a tenant. Body: tenantId (required), optional landlordNote."""
     tenant_oid = _oid(body.tenantId)
     now = datetime.utcnow()
-    # propertyId optional; could be derived from tenant assignment if you have a tenancies collection
     doc = {
         "tenantId": tenant_oid,
         "propertyId": None,
@@ -221,7 +221,6 @@ def set_verdict(
     voucher_type = body.voucherType or DEFAULT_VOUCHER_TYPE
     if voucher_type not in ("cinema_10", "coffee_5", "amazon_10"):
         voucher_type = DEFAULT_VOUCHER_TYPE
-    import secrets
     code = "".join(secrets.choice("0123456789") for _ in range(16))
     voucher_doc = {
         "tenantId": doc["tenantId"],

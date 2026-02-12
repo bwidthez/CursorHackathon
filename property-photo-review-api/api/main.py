@@ -4,8 +4,8 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
-from backend.config import UPLOAD_DIR
-from backend.routers import property_reviews, vouchers
+from api.config import UPLOAD_DIR
+from api.routers import property_reviews, vouchers
 
 app = FastAPI(
     title="Property Photo Review API",

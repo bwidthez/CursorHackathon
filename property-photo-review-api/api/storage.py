@@ -1,9 +1,8 @@
 """Local file storage for uploaded photos."""
-import os
 import secrets
 from pathlib import Path
 
-from backend.config import UPLOAD_DIR, ALLOWED_IMAGE_EXTENSIONS, MAX_FILE_SIZE_BYTES
+from api.config import UPLOAD_DIR, ALLOWED_IMAGE_EXTENSIONS
 
 
 def ensure_upload_dir() -> Path:

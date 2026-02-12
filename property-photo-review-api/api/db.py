@@ -2,7 +2,7 @@
 from pymongo import MongoClient
 from pymongo.database import Database
 
-from backend.config import MONGODB_URI, DB_NAME
+from api.config import MONGODB_URI, DB_NAME
 
 _client: MongoClient | None = None
 

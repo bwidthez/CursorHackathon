@@ -4,9 +4,9 @@ from typing import Annotated
 from bson import ObjectId
 from fastapi import APIRouter, Depends
 
-from backend.db import get_db
-from backend.dependencies import require_any_role
-from backend.models import VoucherResponse
+from api.db import get_db
+from api.dependencies import require_any_role
+from api.models import VoucherResponse
 
 router = APIRouter(prefix="/api/vouchers", tags=["vouchers"])
 
