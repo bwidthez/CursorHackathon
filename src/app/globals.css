@@ -1,0 +1,125 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Professional white / gray / black palette */
+  --bg: #f7f8fa;
+  --surface: #ffffff;
+  --surface-hover: #e5e7eb;
+  --border: #d1d5db;
+  --border-light: #e5e7eb;
+  --primary: #111827;
+  --primary-hover: #1f2937;
+  --danger: #dc2626;
+  --danger-hover: #b91c1c;
+  --success: #16a34a;
+  --warning: #d97706;
+  --muted: #6b7280;
+  --text: #111827;
+  --text-muted: #6b7280;
+  --text-secondary: #374151;
+  --link: #111827;
+  --radius: 10px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1.25rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 2.5rem;
+  --spacing-2xl: 3rem;
+}
+
+html {
+  font-size: 18px;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--link);
+  text-decoration-color: var(--border);
+  text-underline-offset: 2px;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--text);
+}
+
+button {
+  cursor: pointer;
+  font: inherit;
+  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+::placeholder {
+  color: #9ca3af;
+}
+
+::selection {
+  background: #111827;
+  color: #ffffff;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Mobile responsiveness ────────────────────────────── */
+@media (max-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+
+  :root {
+    --spacing-xl: 1.25rem;
+    --spacing-2xl: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 15px;
+  }
+
+  :root {
+    --spacing-lg: 1.25rem;
+    --spacing-xl: 1rem;
+    --spacing-2xl: 1.25rem;
+  }
+}

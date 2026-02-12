@@ -1,0 +1,29 @@
+{
+  "name": "rentshield",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "dev:backend": "uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "seed": "tsx scripts/seed.ts"
+  },
+  "dependencies": {
+    "mongodb": "^6.12.0",
+    "mongodb-memory-server": "^11.0.1",
+    "next": "14.2.18",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.2.18",
+    "tsx": "^4.21.0",
+    "typescript": "^5.6.3"
+  }
+}

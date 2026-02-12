@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RentShield — Northampton Renters' Rights</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface-hover: #334155;
+      --primary: #2563eb;
+      --danger: #dc2626;
+      --muted: #64748b;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --link: #38bdf8;
+      --radius: 10px;
+      --spacing-sm: 0.75rem;
+      --spacing-md: 1.25rem;
+      --spacing-lg: 2rem;
+      --spacing-xl: 2.5rem;
+      --spacing-2xl: 3rem;
+    }
+    html { font-size: 18px; scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+    a { color: var(--link); }
+    a:hover { text-decoration: underline; }
+
+    .header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--surface-hover);
+      padding: var(--spacing-md) var(--spacing-xl);
+    }
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .logo:hover { text-decoration: none; color: var(--text); }
+    .tagline { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+
+    .page {
+      display: none;
+      padding: var(--spacing-2xl) var(--spacing-xl);
+      max-width: 800px;
+      margin: 0 auto;
+      min-height: calc(100vh - 80px);
+    }
+    .page.active { display: block; }
+
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: var(--spacing-xl);
+      margin-top: var(--spacing-lg);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .card h2 { margin-top: 0; font-size: 1.2rem; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 24px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      font: inherit;
+      font-size: 1rem;
+      text-decoration: none;
+      min-height: 52px;
+      transition: opacity 0.15s ease;
+    }
+    .btn:hover { opacity: 0.92; }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-danger { background: var(--danger); color: #fef2f2; }
+    .btn-secondary { background: var(--surface-hover); color: var(--text); border: 1px solid rgba(255,255,255,0.08); }
+    .btn-block { width: 100%; display: block; text-align: center; }
+
+    ul.unstyled { list-style: none; padding: 0; margin: 0; }
+    .nav-cards li { margin-bottom: var(--spacing-md); }
+    .nav-cards a {
+      display: block;
+      padding: var(--spacing-lg);
+      background: var(--surface);
+      border-radius: var(--radius);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1.05rem;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+    .nav-cards a:hover { background: var(--surface-hover); border-color: rgba(255,255,255,0.1); text-decoration: none; color: var(--text); }
+    .nav-cards a.danger-card { background: rgba(220, 38, 38, 0.15); border-color: rgba(220, 38, 38, 0.3); color: #fecaca; }
+    .nav-cards a.danger-card:hover { background: rgba(220, 38, 38, 0.25); }
+
+    .back {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: var(--spacing-lg);
+      display: inline-block;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .back:hover { color: var(--link); }
+
+    .page-title { font-size: 1.75rem; font-weight: 700; margin: 0 0 var(--spacing-sm); letter-spacing: -0.02em; }
+    .page-desc { color: var(--text-muted); font-size: 1.05rem; margin: 0 0 var(--spacing-lg); line-height: 1.55; }
+
+    label { display: block; font-size: 0.95rem; font-weight: 600; margin-bottom: var(--spacing-sm); color: var(--text); }
+    textarea {
+      width: 100%;
+      min-height: 140px;
+      padding: 14px 18px;
+      border-radius: var(--radius);
+      background: var(--bg);
+      border: 1px solid var(--surface-hover);
+      color: var(--text);
+      font: inherit;
+      font-size: 1rem;
+      margin-bottom: var(--spacing-md);
+      line-height: 1.5;
+    }
+    input[type="text"], input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: var(--radius);
+      background: var(--bg);
+      border: 1px solid var(--surface-hover);
+      color: var(--text);
+      font: inherit;
+      font-size: 1rem;
+      margin-bottom: var(--spacing-md);
+    }
+    select {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: var(--radius);
+      background: var(--bg);
+      border: 1px solid var(--surface-hover);
+      color: var(--text);
+      font: inherit;
+      font-size: 1rem;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .banner-valid { background: rgba(22, 163, 74, 0.15); border-left: 4px solid #16a34a; padding: var(--spacing-md); border-radius: var(--radius); margin-bottom: var(--spacing-md); font-size: 1rem; }
+    .banner-invalid { background: rgba(234, 179, 8, 0.15); border-left: 4px solid #eab308; padding: var(--spacing-md); border-radius: var(--radius); margin-bottom: var(--spacing-md); font-size: 1rem; }
+    .disclaimer { font-size: 0.9rem; color: var(--muted); margin-top: var(--spacing-xl); line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="#" class="logo" data-page="home">RentShield</a>
+      <p class="tagline">Northampton · Renters' Rights Act 2025</p>
+    </div>
+  </header>
+
+  <!-- HOME -->
+  <div id="home" class="page active">
+    <h1 class="page-title">What do you need?</h1>
+    <p class="page-desc">
+      Get instant guidance on your rights as a renter or landlord in Northampton under the Renters' Rights Act 2025.
+    </p>
+    <ul class="unstyled nav-cards">
+      <li>
+        <a href="#" data-page="what-happened">
+          <strong>Get advice</strong> — Describe your situation and get personalised guidance
+        </a>
+      </li>
+      <li>
+        <a href="#" data-page="notice-checker">
+          <strong>Check a notice</strong> — Paste a notice from your landlord; we'll check if it's valid
+        </a>
+      </li>
+      <li>
+        <a href="#" class="danger-card" data-page="emergency">
+          <strong>Emergency help</strong> — Step-by-step guidance and voice instructions
+        </a>
+      </li>
+    </ul>
+    <p style="margin-top: var(--spacing-xl); font-size: 1rem;">
+      <a href="#" data-page="login" style="font-weight: 600;">Log in</a> for tenants, landlords, and admins.
+    </p>
+    <p class="disclaimer">
+      This is general information only, not legal advice. For your specific situation, consider
+      contacting Shelter, Citizens Advice, or a solicitor.
+    </p>
+  </div>
+
+  <!-- WHAT JUST HAPPENED -->
+  <div id="what-happened" class="page">
+    <a href="#" class="back" data-page="home">← Back to home</a>
+    <h1 class="page-title">What just happened?</h1>
+    <p class="page-desc">
+      Describe your situation in plain language. We'll explain your rights and next steps under the Renters' Rights Act 2025.
+    </p>
+    <label for="situation">Your situation</label>
+    <textarea id="situation" placeholder="e.g. My landlord just told me I have to leave in two weeks."></textarea>
+    <button type="button" class="btn btn-primary btn-block">Get advice</button>
+    <div class="card" style="margin-top: var(--spacing-xl);">
+      <h2>Your rights and next steps</h2>
+      <p style="white-space: pre-wrap; line-height: 1.6; font-size: 1rem; color: var(--text-muted);">
+        (Preview only — run the app with npm to get real AI advice.)
+
+        Under the Renters' Rights Act 2025, your landlord cannot evict you without a court order. They must give you proper written notice and use a valid ground. If they have only given you two weeks verbally, that is not sufficient. Do not leave the property. Contact West Northamptonshire Council to report if you are being pressured, and consider speaking to Shelter or Citizens Advice.
+      </p>
+      <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: var(--spacing-md);">For best results, find a quiet space.</p>
+      <button type="button" class="btn btn-secondary" style="margin-top: var(--spacing-sm);">Listen aloud</button>
+    </div>
+    <p class="disclaimer">This is general information only, not legal advice.</p>
+  </div>
+
+  <!-- NOTICE CHECKER -->
+  <div id="notice-checker" class="page">
+    <a href="#" class="back" data-page="home">← Back to home</a>
+    <h1 class="page-title">Notice checker</h1>
+    <p class="page-desc">
+      Paste the text of a notice from your landlord. We'll check the form type, grounds, and notice period against the Renters' Rights Act 2025.
+    </p>
+    <label for="noticeText">Notice text</label>
+    <textarea id="noticeText" placeholder="Paste the full notice text here…" rows="6"></textarea>
+    <button type="button" class="btn btn-primary btn-block">Check notice</button>
+    <div class="banner-invalid" style="margin-top: var(--spacing-xl);">
+      <strong>Form type:</strong> Section 8 · <strong>Notice period:</strong> 2 week(s)<br>
+      This notice appears <strong>INVALID or problematic</strong> under current rules.
+    </div>
+    <div class="card">
+      <p style="line-height: 1.55; font-size: 1rem;">(Preview only — run the app to validate real notices.)</p>
+      <strong>Next steps:</strong>
+      <ol style="padding-left: 1.5rem; margin-top: var(--spacing-sm); font-size: 1rem;">
+        <li>Do not leave until you have received a valid notice and, if applicable, a court order.</li>
+        <li>Contact Shelter or Citizens Advice with a copy of the notice.</li>
+      </ol>
+    </div>
+    <p class="disclaimer">This is general information only, not legal advice.</p>
+  </div>
+
+  <!-- EMERGENCY -->
+  <div id="emergency" class="page">
+    <a href="#" class="back" data-page="home">← Back to home</a>
+    <h1 class="page-title" style="color: #fecaca;">I'm being evicted right now</h1>
+    <p class="page-desc">
+      Use this for step-by-step guidance and voice instructions. Your landlord cannot force you out without a court order.
+    </p>
+    <label style="display: flex; align-items: center; gap: var(--spacing-sm); margin-bottom: var(--spacing-lg); font-size: 1rem;">
+      <input type="checkbox" checked style="width: 20px; height: 20px;" /> Play guidance aloud (recommended)
+    </label>
+    <button type="button" class="btn btn-danger btn-block" style="padding: var(--spacing-lg); font-size: 1.1rem;">Get emergency guidance now</button>
+    <div class="card" style="margin-top: var(--spacing-xl);">
+      <h2>What to do now</h2>
+      <p style="white-space: pre-wrap; line-height: 1.65; font-size: 1.05rem;">
+        <strong>Do not leave the property.</strong> Your landlord cannot force you out without a court order. Lock the door if you need to feel safe.
+
+        Report to West Northamptonshire Council. You can also call Shelter's emergency helpline. If you feel in danger, call 101 or 999 in an emergency.
+      </p>
+      <a href="https://www.westnorthants.gov.uk/private-housing-tenants-and-landlords/housing-disrepair-and-enforcement-housing-conditions" target="_blank" rel="noopener" class="btn btn-secondary" style="margin-top: var(--spacing-md); text-decoration: none;">Report to West Northamptonshire Council →</a>
+    </div>
+    <p class="disclaimer">In immediate danger? Call 999. For housing advice: Shelter, Citizens Advice.</p>
+  </div>
+
+  <!-- LOGIN -->
+  <div id="login" class="page">
+    <a href="#" class="back" data-page="home">← Back to home</a>
+    <h1 class="page-title">Log in</h1>
+    <p class="page-desc">Enter your details to access your dashboard.</p>
+    <div class="card">
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="you@example.com" />
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="••••••••" />
+      <label style="margin-top: var(--spacing-md);">Log in as</label>
+      <select>
+        <option value="tenant">Tenant</option>
+        <option value="landlord">Landlord</option>
+        <option value="admin">Admin</option>
+      </select>
+      <button type="button" class="btn btn-primary btn-block">Log in</button>
+    </div>
+    <p class="disclaimer">Demo: choose a role and any email/password to open that dashboard.</p>
+  </div>
+
+  <script>
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+      var el = document.getElementById(id);
+      if (el) el.classList.add('active');
+    }
+    document.querySelectorAll('[data-page]').forEach(function(el) {
+      el.addEventListener('click', function(e) {
+        e.preventDefault();
+        showPage(el.getAttribute('data-page'));
+      });
+    });
+  </script>
+</body>
+</html>
