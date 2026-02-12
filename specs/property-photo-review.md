@@ -37,7 +37,7 @@ sequenceDiagram
   Backend->>DB: Add to property_reviews
   Admin->>Backend: List pending reviews
   Admin->>Backend: Thumbs up (with voucher type) or Thumbs down
-  Backend->>DB: Update verdict; if thumbs up, create voucher/reward
+  Backend->>DB: "Update verdict; if thumbs up, create voucher/reward"
   Backend-->>Tenant: Voucher visible in reward history
 ```
 
