@@ -33,11 +33,11 @@ sequenceDiagram
 
   Landlord->>Backend: Create review + upload photos
   Backend->>DB: property_reviews
-  Tenant->>Backend: Upload photo(s) for review
+  Tenant->>Backend: Upload photos for review
   Backend->>DB: Add to property_reviews
   Admin->>Backend: List pending reviews
-  Admin->>Backend: Thumbs up (with voucher type) or Thumbs down
-  Backend->>DB: "Update verdict; if thumbs up, create voucher/reward"
+  Admin->>Backend: Thumbs up or down with voucher type
+  Backend->>DB: Update verdict and create voucher if thumbs up
   Backend-->>Tenant: Voucher visible in reward history
 ```
 
